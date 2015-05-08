@@ -10,7 +10,7 @@
 
 @interface ViewController ()
 
-@property (nonatomic) NSArray *lineArray;
+@property (nonatomic) NSArray *triangleArray;
 @property (nonatomic) NSString *triangleString;
 
 @end
@@ -38,9 +38,25 @@
     NSURLSessionDataTask *dataTask = [session dataTaskWithURL:triangleURL completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         // transfer data to string, etc
         self.triangleString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        NSLog(@"%@", self.triangleString);
+        
+        self.triangleArray = [NSArray array];
+        self.triangleArray = [self parseStringToArray:self.triangleString];
     }];
     [dataTask resume];
+}
+
+- (NSArray *) parseStringToArray:(NSString *)string
+{
+    // create big array from string (by row)
+    NSArray *rowArray = [string componentsSeparatedByString:@"\n"];
+    NSMutableArray *mutableArray = [NSMutableArray array];
+    // loop through array
+    for (NSString *numbers in rowArray) {
+        NSArray *columnArray = [numbers componentsSeparatedByString:@" "];
+        [mutableArray addObject:columnArray];
+    }
+    NSLog(@"%@", mutableArray);
+    return mutableArray;
 }
 
 
