@@ -59,6 +59,11 @@
     return mutableArray;
 }
 
+// calculate highest out of 2 columns
+// i.e. column 0 and column 1
+// if column 1 > than column 0 go to 1 and add the integer
+// then compare column 1 and column 2
+// if column 0 > column 1 go to 0 and add the integer
 
 
 - (void)didReceiveMemoryWarning {
